@@ -1,20 +1,20 @@
-
 package com.jmatch.dao;
 
 import com.jmatch.interfaces.DbCredentials;
 import java.sql.*;
 
 public class DBConnection implements DbCredentials {
+
     String port = PORT;
     String dbname = DBNAME;
     String user = USER;
     String passwd = PASSWD;
-    
+
     public static Connection connect;
     public Statement st;
     public PreparedStatement ps;
     public ResultSet rs;
-    
+
     public DBConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -26,9 +26,15 @@ public class DBConnection implements DbCredentials {
             System.out.println(e);
         }
     }
-    
+
     public static void closeConnection() throws SQLException {
         connect.close();
     }
-    
+
+    public static String statusConnection() throws SQLException {
+        return (connect != null && !connect.isClosed())
+                ? "Conexion establecida"
+                : "Error en la conexion";
+    }
+
 }
