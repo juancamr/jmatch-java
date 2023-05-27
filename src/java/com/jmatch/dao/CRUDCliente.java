@@ -5,7 +5,6 @@
  */
 package com.jmatch.dao;
 
-import com.jmatch.config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +13,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import miInterface.ClienteInterface;
+import com.jmatch.interfaces.ClienteInterface;
 import com.jmatch.modelo.Cliente;
 
 /**
  *
  * @author JOSE HUAVIL
  */
-public class ClienteDAO implements ClienteInterface{
+public class CRUDCliente implements ClienteInterface{
     
-    Conexion cn=new Conexion();
+    DBConnection cn=new DBConnection();
     Connection con;
     Statement st;
     PreparedStatement ps;
@@ -45,7 +44,7 @@ public class ClienteDAO implements ClienteInterface{
             ps.setString(6, c.getPassword());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;  
     }
@@ -64,7 +63,7 @@ public class ClienteDAO implements ClienteInterface{
             ps.setString(6, c.getPassword());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;   
     }
@@ -77,7 +76,7 @@ public class ClienteDAO implements ClienteInterface{
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;  
     }
@@ -99,7 +98,7 @@ public class ClienteDAO implements ClienteInterface{
                 c.setPassword(rs.getString("password"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return c;
     }
@@ -122,7 +121,7 @@ public class ClienteDAO implements ClienteInterface{
                 lista.add(c);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;  
     }

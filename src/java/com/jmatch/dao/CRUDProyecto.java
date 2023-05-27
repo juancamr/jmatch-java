@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.jmatch.dao;
 
-import com.jmatch.config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import miInterface.ProyectoInterface;
+import com.jmatch.interfaces.ProyectoInterface;
 import com.jmatch.modelo.Cliente;
 import com.jmatch.modelo.ProyectoDTO;
 
@@ -18,16 +13,16 @@ import com.jmatch.modelo.ProyectoDTO;
  *
  * @author JOSE HUAVIL
  */
-public class ProyectoDAO implements ProyectoInterface{
-    Conexion cn = new Conexion();
+public class CRUDProyecto implements ProyectoInterface {
+
+    DBConnection cn = new DBConnection();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     ProyectoDTO p;
     ArrayList<ProyectoDTO> lista = new ArrayList<>();
     Cliente e = new Cliente();
-    ClienteDAO ed = new ClienteDAO();
-    
+    CRUDCliente ed = new CRUDCliente();
 
     @Override
     public boolean agregar(ProyectoDTO c) {
@@ -53,5 +48,5 @@ public class ProyectoDAO implements ProyectoInterface{
     public ArrayList<ProyectoDTO> listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
