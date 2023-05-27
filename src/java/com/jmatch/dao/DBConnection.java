@@ -17,11 +17,10 @@ public class DBConnection implements DbCredentials {
 
     public DBConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             String url = String.format("jdbc:mysql://localhost:%s/%s", port, dbname);
             connect = DriverManager.getConnection(url, user, passwd);
             st = connect.createStatement();
-            System.out.println("Conectado a la base de datos");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -31,7 +30,7 @@ public class DBConnection implements DbCredentials {
         connect.close();
     }
 
-    public static String statusConnection() throws SQLException {
+    public static String getStatusConnection() throws SQLException {
         return (connect != null && !connect.isClosed())
                 ? "Conexion establecida"
                 : "Error en la conexion";
