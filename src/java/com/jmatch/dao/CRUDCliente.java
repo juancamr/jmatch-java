@@ -21,10 +21,11 @@ public class CRUDCliente extends DBConnection {
             ps.setString(6, cliente.getPassword());
             ps.executeUpdate();
             ps.close();
+            return true;
         } catch (SQLException e) {
             System.out.println(e);
+            return false;
         }
-        return false;
     }
 
     public boolean editarCliente(Cliente cliente) {
@@ -77,7 +78,7 @@ public class CRUDCliente extends DBConnection {
         return cliente;
     }
 
-    public ArrayList<Cliente> listarTodos() {
+    public ArrayList<Cliente> getClientes() {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         String sql = "select * from cliente";
         try {

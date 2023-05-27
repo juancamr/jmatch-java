@@ -1,8 +1,3 @@
-<%-- 
-    Document   : listar
-    Created on : 21/05/2023, 04:00:32 PM
-    Author     : JOSE HUAVIL
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

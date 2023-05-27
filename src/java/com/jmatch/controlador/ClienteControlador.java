@@ -13,75 +13,84 @@ import com.jmatch.dao.CRUDCliente;
 import com.jmatch.dao.DBConnection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ControlCliente", urlPatterns = {"/ControlCliente"})
+@WebServlet(name = "ControlCliente", urlPatterns = {"/clientes", "/clientes/agregar"})
 public class ClienteControlador extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String data, pagina = "", cod, nom, ape, mail, pass;
-        int tlf, listado = 0;
-        Cliente c;
-        CRUDCliente cd = new CRUDCliente();
-        ArrayList<Cliente> lis = new ArrayList<>();
-        try {
-            System.out.println(DBConnection.getStatusConnection());
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
-        data = request.getParameter("accion");
-
-        if (data.equalsIgnoreCase("AgregarCliente")) {
-            pagina = "cliente/agregar.jsp";
-        }
-
-        if (data.equalsIgnoreCase("Agregar")) {
-            cod = request.getParameter("codigo");
-            nom = request.getParameter("nombre");
-            ape = request.getParameter("apellido");
-            tlf = Integer.parseInt(request.getParameter("telefono"));
-            mail = request.getParameter("correo");
-            pass = request.getParameter("password");
-            c = new Cliente(cod, nom, ape, tlf, mail, pass);
-            cd.agregarCliente(c);
-            listado = 1;
-        }
-
-        if (data.equalsIgnoreCase("ListarCliente")) {
-            listado = 1;
-        }
-
-        if (data.equalsIgnoreCase("Eliminar")) {
-            cod = request.getParameter("codigo");
-            cd.eliminarCliente(cod);
-            listado = 1;
-        }
-
-        if (data.equalsIgnoreCase("Modificar")) {
-            cod = request.getParameter("codigo");
-            c = cd.getCliente(cod);
-            request.setAttribute("cli", c);
-            pagina = "cliente/editar.jsp";
-        }
-
-        if (data.equalsIgnoreCase("Actualizar")) {
-            cod = request.getParameter("codigo");
-            nom = request.getParameter("nombre");
-            ape = request.getParameter("apellido");
-            tlf = Integer.parseInt(request.getParameter("telefono"));
-            mail = request.getParameter("correo");
-            pass = request.getParameter("password");
-            c = new Cliente(cod, nom, ape, tlf, mail, pass);
-            cd.editarCliente(c);
-            listado = 1;
-        }
-
-        if (listado == 1) {
-            lis = cd.listarTodos();
-            request.setAttribute("lisCli", lis);
-            pagina = "cliente/listar.jsp";
-        }
+//        String data, pagina = "", cod, nom, ape, mail, pass;
+//        int tlf, listado = 0;
+//        Cliente c;
+//        CRUDCliente cd = new CRUDCliente();
+//        ArrayList<Cliente> lis = new ArrayList<>();
+//        
+//        //comprobar la conxion a la base de datos
+//        try {
+//            System.out.println(DBConnection.getStatusConnection());
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//
+//        data = request.getParameter("accion");
+//
+//        if (data.equalsIgnoreCase("AgregarCliente")) {
+//            pagina = "cliente/agregar.jsp";
+//        }
+//
+//        if (data.equalsIgnoreCase("Agregar")) {
+//            cod = request.getParameter("codigo");
+//            nom = request.getParameter("nombre");
+//            ape = request.getParameter("apellido");
+//            tlf = Integer.parseInt(request.getParameter("telefono"));
+//            mail = request.getParameter("correo");
+//            pass = request.getParameter("password");
+//            c = new Cliente(cod, nom, ape, tlf, mail, pass);
+//            cd.agregarCliente(c);
+//            listado = 1;
+//        }
+//
+//        if (data.equalsIgnoreCase("ListarCliente")) {
+//            listado = 1;
+//        }
+//
+//        if (data.equalsIgnoreCase("Eliminar")) {
+//            cod = request.getParameter("codigo");
+//            cd.eliminarCliente(cod);
+//            listado = 1;
+//        }
+//
+//        if (data.equalsIgnoreCase("Modificar")) {
+//            cod = request.getParameter("codigo");
+//            c = cd.getCliente(cod);
+//            request.setAttribute("cli", c);
+//            pagina = "cliente/editar.jsp";
+//        }
+//
+//        if (data.equalsIgnoreCase("Actualizar")) {
+//            cod = request.getParameter("codigo");
+//            nom = request.getParameter("nombre");
+//            ape = request.getParameter("apellido");
+//            tlf = Integer.parseInt(request.getParameter("telefono"));
+//            mail = request.getParameter("correo");
+//            pass = request.getParameter("password");
+//            c = new Cliente(cod, nom, ape, tlf, mail, pass);
+//            cd.editarCliente(c);
+//            listado = 1;
+//        }
+//
+//        if (listado == 1) {
+//            lis = cd.listarTodos();
+//            request.setAttribute("lisCli", lis);
+//            pagina = "cliente/listar.jsp";
+//        }
+        CRUDCliente crudCliente = new CRUDCliente();
+        ArrayList<Cliente> listaClientes = crudCliente.getClientes();
+        
+        request.setAttribute("listaClientes", listaClientes);
+        request.setAttribute("hola", "hola");
+        
+        String pagina = "WEB-INF/views/clientes.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(pagina);
         rd.forward(request, response);
     }
@@ -112,7 +121,18 @@ public class ClienteControlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String urlPattern = request.getServletPath();
+        if (urlPattern.equals("/clientes/agregar")) {
+            cod = request.getParameter("codigo");
+//            nom = request.getParameter("nombre");
+//            ape = request.getParameter("apellido");
+//            tlf = Integer.parseInt(request.getParameter("telefono"));
+//            mail = request.getParameter("correo");
+//            pass = request.getParameter("password");
+//            c = new Cliente(cod, nom, ape, tlf, mail, pass);
+//            cd.agregarCliente(c);
+//            listado = 1;
+        }
     }
 
     /**

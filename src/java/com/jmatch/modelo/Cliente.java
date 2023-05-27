@@ -12,15 +12,6 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String codigo, String nombre, String apellido, int telefono, String correo, String password) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.password = password;
-    }
-
     public String getCodigo() {
         return codigo;
     }
