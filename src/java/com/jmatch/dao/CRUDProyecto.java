@@ -1,31 +1,41 @@
-
 package com.jmatch.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import com.jmatch.modelo.Cliente;
-import com.jmatch.modelo.ProyectoDTO;
+import com.jmatch.modelo.Proyecto;
 
-public class CRUDProyecto {
+public class CRUDProyecto extends DBConnection {
 
-    public boolean agregar(ProyectoDTO c) {
+    public boolean agregarProyecto(Proyecto proyecto) {
         return true;
     }
 
-    public boolean modificar(ProyectoDTO c) {
+    public boolean editarProyecto(Proyecto proyecto) {
         return true;
     }
 
-    public boolean eliminar(String cod) {
+    public boolean eliminarProyecto(String codigo) {
         return true;
     }
 
-    public ProyectoDTO listarUno(String cod) {
-        return new ProyectoDTO();
+    public Proyecto getProyecto(String codigo) {
+        return new Proyecto();
     }
 
-    public ArrayList<ProyectoDTO> listarTodos() {
-        return new ArrayList<ProyectoDTO>();
+    public ArrayList<Proyecto> getProyectos() {
+        String sql = "SELECT * FROM proyecto";
+        ArrayList<Proyecto> listaProyecto = new ArrayList<>();
+        try {
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Proyecto proyecto = new Proyecto();
+                proyecto.setId_proyecto(PORT);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return new ArrayList<Proyecto>();
     }
 
 }
