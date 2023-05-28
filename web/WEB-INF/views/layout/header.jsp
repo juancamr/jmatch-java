@@ -40,6 +40,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="clientes">Clientes</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="proyectos">Proyectos</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

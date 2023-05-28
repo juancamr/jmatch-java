@@ -8,7 +8,23 @@ import com.jmatch.modelo.Proyecto;
 public class CRUDProyecto extends DBConnection {
 
     public boolean agregarProyecto(Proyecto proyecto) {
-        return true;
+        String sql = "INSERT INTO proyecto VALUES(?, ?, ?, ?, ?, ?, ?)";
+        try {
+            ps = connect.prepareStatement(sql);
+            ps.setString(1, proyecto.getIdProyecto());
+            ps.setString(2, proyecto.getCliente().getCodigo());
+            ps.setString(3, proyecto.getTitulo());
+            ps.setString(4, proyecto.getDescripcion());
+            ps.setString(5, proyecto.getFechaPublicacion());
+            ps.setString(6, proyecto.getFechaLimite());
+            ps.setDouble(7, proyecto.getPresupuesto());
+            ps.close();
+            ps.executeUpdate();
+            return true;
+        } catch(SQLException e) {
+            System.out.println(e);
+            return false;
+        }
     }
 
     public boolean editarProyecto(Proyecto proyecto) {

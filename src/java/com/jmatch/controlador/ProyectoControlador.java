@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jmatch.modelo.Proyecto;
 
 @WebServlet(name = "ProyectoControlador", urlPatterns = {
-    "/proyectos"
+    "/proyectos", "/proyectos/agregar"
 })
 public class ProyectoControlador extends HttpServlet {
 
@@ -24,8 +24,10 @@ public class ProyectoControlador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = request.getServletPath();
+        
         if (url.equals("/proyectos")) {
             request.setAttribute("listaProyectos", crudProyecto.getProyectos());
+            request.setAttribute("listaClientes", crudCliente.getClientes());
             String pagina = "WEB-INF/views/proyectos.jsp";
             RequestDispatcher rd = request.getRequestDispatcher(pagina);
             rd.forward(request, response);
@@ -36,8 +38,10 @@ public class ProyectoControlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = request.getServletPath();
+        
         if (url.equals("/proyectos/agregar")) {
             Proyecto proyecto = new Proyecto();
+            proyecto.setIdProyecto(request.getParameter("codigo"));
             proyecto.setCliente(crudCliente.getCliente(request.getParameter("codigo_cliente")));
             proyecto.setTitulo(request.getParameter("titulo"));
             proyecto.setDescripcion(request.getParameter("descripcion"));
