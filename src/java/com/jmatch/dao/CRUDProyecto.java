@@ -18,8 +18,8 @@ public class CRUDProyecto extends DBConnection {
             ps.setString(5, proyecto.getFechaPublicacion());
             ps.setString(6, proyecto.getFechaLimite());
             ps.setDouble(7, proyecto.getPresupuesto());
-            ps.close();
             ps.executeUpdate();
+            ps.close();
             return true;
         } catch(SQLException e) {
             System.out.println(e);

@@ -1,13 +1,14 @@
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 
 <div class="container mt-5">
-    <h2 class="mb-3">Agregar Proyecto</h2>
-    <form action="proyectos/agregar">
-        <div class="form-floating mb-3">
+    <form action="proyectos/agregar" method="post">
+        <h2 class="mb-3 d-inline me-5">Agregar Proyecto</h2>
+        <button type="submit" class="btn btn-dark d-inline">Agregar</button>
+        <div class="form-floating my-3">
             <input name="codigo" type="text" class="form-control" id="floatingInput" placeholder="Titulo">
             <label for="floatingInput">Codigo</label>
         </div>
-        <select class="form-select form-select-lg mb-3" aria-label="Default select example">
+        <select name="codigo_cliente" class="form-select form-select-lg mb-3" aria-label="Default select example">
             <option selected>Selecciona un cliente</option>
             <c:forEach var="cliente" items="${listaClientes}">
                 <option value="${cliente.getCodigo()}">${cliente.getNombre()}</option>
@@ -50,13 +51,13 @@
         <tbody>
             <c:forEach var="proyecto" items="${listaProyectos}" >
                 <tr>
-                    <th scope="row">${proyecto.getIdProyecto}</th>
+                    <th scope="row">${proyecto.getIdProyecto()}</th>
                     <td>${proyecto.getCliente().getNombre()}</td>
                     <td>${proyecto.getTitulo()}</td>
                     <td>${proyecto.getDescripcion()}</td>
-                    <td>${proyecto.getFechaPublicacion}</td>
-                    <td>${proyecto.getFechaLimite}</td>
-                    <td>${proyecto.getPresupuesto}</td>
+                    <td>${proyecto.getFechaPublicacion()}</td>
+                    <td>${proyecto.getFechaLimite()}</td>
+                    <td>${proyecto.getPresupuesto()}</td>
                     <td></td>
                 </tr>
             </c:forEach>

@@ -48,6 +48,7 @@ public class ProyectoControlador extends HttpServlet {
             proyecto.setFechaPublicacion(request.getParameter("fecha_publicacion"));
             proyecto.setFechaLimite(request.getParameter("fecha_limite"));
             proyecto.setPresupuesto(Double.parseDouble(request.getParameter("presupuesto")));
+            crudProyecto.agregarProyecto(proyecto);
             response.sendRedirect("/proyectos");
         }
     }
