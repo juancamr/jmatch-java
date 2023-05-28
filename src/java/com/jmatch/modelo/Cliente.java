@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.jmatch.modelo;
 
-/**
- *
- * @author JOSE HUAVIL
- */
 public class Cliente {
     private String codigo;
     private String nombre;
@@ -18,15 +10,6 @@ public class Cliente {
     private String password;
 
     public Cliente() {
-    }
-
-    public Cliente(String codigo, String nombre, String apellido, int telefono, String correo, String password) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.password = password;
     }
 
     public String getCodigo() {
