@@ -1,11 +1,11 @@
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h1>Clientes</h1>
 <h3>Agregar Cliente</h3>
 <form method="post" action="clientes/agregar">
     <label>ID_Cliente</label>
-    <input type="text" name="codigo"><br>
+    <input type="text" name="codigo">
+    <br>
     <label>Nombres</label>
     <input type="text" name="nombre"><br>
     <label>Apellidos</label>
@@ -38,7 +38,12 @@
             <td>${cliente.getTelefono()}</td>
             <td>${cliente.getCorreo()}</td>
             <td>${cliente.getPassword()}</td>
+            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal${cliente.getCodigo()}">
+                    Editar
+                </button></td>
+            <td><a href="clientes/eliminar?id=${cliente.getCodigo()}">Eliminar</a></td>
         </tr>
+        <%@ include file="/WEB-INF/views/modals/modalEditarCliente.jsp" %>
     </c:forEach>
 </table>
 

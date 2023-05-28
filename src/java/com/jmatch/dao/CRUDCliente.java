@@ -31,7 +31,7 @@ public class CRUDCliente extends DBConnection {
     public boolean editarCliente(Cliente cliente) {
         try {
             String sql = "update cliente set id_cliente=?, nombre=?, apellido=?, telefono=?, correo=?, password=? "
-                    + "where id_cliente = " + cliente.getCodigo();
+                    + "where id_cliente = \"" + cliente.getCodigo() + "\"";
             ps = connect.prepareStatement(sql);
             ps.setString(1, cliente.getCodigo());
             ps.setString(2, cliente.getNombre());
@@ -49,9 +49,8 @@ public class CRUDCliente extends DBConnection {
 
     public boolean eliminarCliente(String cod) {
         try {
-            String sql = "delete from cliente where id_cliente=" + cod;
-            st.executeQuery(sql);
-            st.close();
+            String sql = "delete from cliente where id_cliente=\"" + cod + "\"";
+            st.executeUpdate(sql);
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -59,7 +58,7 @@ public class CRUDCliente extends DBConnection {
     }
 
     public Cliente getCliente(String cod) {
-        String sql = "select * from cliente where id_cliente=" + cod;
+        String sql = "select * from cliente where id_cliente=\"" + cod + "\"";
         Cliente cliente = new Cliente();
         try {
             rs = st.executeQuery(sql);
