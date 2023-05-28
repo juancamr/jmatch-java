@@ -25,17 +25,25 @@ public class CRUDProyecto extends DBConnection {
 
     public ArrayList<Proyecto> getProyectos() {
         String sql = "SELECT * FROM proyecto";
+        CRUDCliente crudCliente = new CRUDCliente();
         ArrayList<Proyecto> listaProyecto = new ArrayList<>();
         try {
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 Proyecto proyecto = new Proyecto();
-                proyecto.setId_proyecto(PORT);
+                proyecto.setIdProyecto(rs.getString(1));
+                proyecto.setCliente(crudCliente.getCliente(rs.getString(2)));
+                proyecto.setTitulo(rs.getString(3));
+                proyecto.setDescripcion(rs.getString(4));
+                proyecto.setFechaPublicacion(rs.getString(5));
+                proyecto.setFechaLimite(rs.getString(6));
+                proyecto.setPresupuesto(rs.getDouble(7));
+                listaProyecto.add(proyecto);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return new ArrayList<Proyecto>();
+        return listaProyecto;
     }
 
 }

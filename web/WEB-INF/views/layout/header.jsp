@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <nav class="position-fixed w-100 navbar navbar-expand-lg navbar-light bg-white border-shadow" aria-label="Offcanvas navbar large"
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-shadow" aria-label="Offcanvas navbar large"
                  style="
                  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
                 <div class="container">
