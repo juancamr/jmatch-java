@@ -58,8 +58,13 @@
                     <td>${proyecto.getFechaPublicacion()}</td>
                     <td>${proyecto.getFechaLimite()}</td>
                     <td>${proyecto.getPresupuesto()}</td>
+                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProyecto${proyecto.getIdProyecto()}">
+                            Editar
+                        </button></td>
+                    <td><a href="proyectos/eliminar?id=${proyecto.getIdProyecto()}">Eliminar</a></td>
                     <td></td>
                 </tr>
+                <%@ include file="/WEB-INF/views/modals/modalEditarProyecto.jsp" %>
             </c:forEach>
         </tbody>
     </table>

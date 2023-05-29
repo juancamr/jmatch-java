@@ -1,5 +1,6 @@
 package com.jmatch.controlador;
 
+import static com.jmatch.controlador.ProyectoControlador.crudProyecto;
 import com.jmatch.modelo.Proyecto;
 import com.jmatch.services.CRUDCliente;
 import com.jmatch.services.CRUDProyecto;
@@ -10,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ProyectoControlador {
-    
+
     static CRUDProyecto crudProyecto = new CRUDProyecto();
     static CRUDCliente crudCliente = new CRUDCliente();
-    
+
     public static void getProyectos(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         req.setAttribute("listaProyectos", crudProyecto.getProyectos());
@@ -22,12 +23,26 @@ public class ProyectoControlador {
         RequestDispatcher rd = req.getRequestDispatcher(pagina);
         rd.forward(req, res);
     }
-    
+
     public static void agregarProyecto(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         crudProyecto.agregarProyecto(makeProyecto(req));
         res.sendRedirect("/proyectos");
     }
-    
+
+    public static void deleteProyecto(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        String id = req.getParameter("id");
+        crudProyecto.eliminarProyecto(id);
+        res.sendRedirect("/proyectos");
+
+    }
+
+    public static void editarProyecto(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        crudProyecto.editarProyecto(makeProyecto(req));
+        res.sendRedirect("/proyectos");
+    }
+
     private static Proyecto makeProyecto(HttpServletRequest req) { //metodo que se usara para agregar y editar
         Proyecto proyecto = new Proyecto();
         proyecto.setIdProyecto(req.getParameter("codigo"));

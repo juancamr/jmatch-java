@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jmatch.controlador.ProyectoControlador;
 
 @WebServlet(name = "ProyectoControlador", urlPatterns = {
-    "/proyectos", "/proyectos/agregar"
+    "/proyectos", "/proyectos/agregar", "/proyectos/editar", "/proyectos/eliminar"
 })
 public class ProyectoRoute extends HttpServlet {
 
@@ -19,6 +19,8 @@ public class ProyectoRoute extends HttpServlet {
         String url = req.getServletPath();
         if (url.equals("/proyectos"))
             ProyectoControlador.getProyectos(req, res);
+        if (url.equals("/proyectos/eliminar"))
+            ProyectoControlador.deleteProyecto(req, res);
     }
 
     @Override
@@ -27,6 +29,9 @@ public class ProyectoRoute extends HttpServlet {
         String url = req.getServletPath();
         if (url.equals("/proyectos/agregar"))
             ProyectoControlador.agregarProyecto(req, res);
+        if (url.equals("/proyectos/editar")) {
+            ProyectoControlador.editarProyecto(req, res);
+        }
     }
 
     @Override
