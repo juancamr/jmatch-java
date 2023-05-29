@@ -1,10 +1,12 @@
-package com.jmatch.dao;
+package com.jmatch.services;
 
+import com.jmatch.config.DBConnection;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.SQLException;
 import com.jmatch.modelo.Cliente;
+import com.jmatch.utils.DebugObject;
 
 public class CRUDCliente extends DBConnection {
 
@@ -29,16 +31,16 @@ public class CRUDCliente extends DBConnection {
     }
 
     public boolean editarCliente(Cliente cliente) {
+        DebugObject.printObject(cliente);
         try {
-            String sql = "update cliente set id_cliente=?, nombre=?, apellido=?, telefono=?, correo=?, password=? "
+            String sql = "update cliente set nombre=?, apellido=?, telefono=?, correo=?, password=? "
                     + "where id_cliente = \"" + cliente.getCodigo() + "\"";
             ps = connect.prepareStatement(sql);
-            ps.setString(1, cliente.getCodigo());
-            ps.setString(2, cliente.getNombre());
-            ps.setString(3, cliente.getApellido());
-            ps.setInt(4, cliente.getTelefono());
-            ps.setString(5, cliente.getCorreo());
-            ps.setString(6, cliente.getPassword());
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getApellido());
+            ps.setInt(3, cliente.getTelefono());
+            ps.setString(4, cliente.getCorreo());
+            ps.setString(5, cliente.getPassword());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {

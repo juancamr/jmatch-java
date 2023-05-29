@@ -1,14 +1,9 @@
-package com.jmatch.dao;
+package com.jmatch.config;
 
 import com.jmatch.interfaces.DbCredentials;
 import java.sql.*;
 
 public class DBConnection implements DbCredentials {
-
-    String port = PORT;
-    String dbname = DBNAME;
-    String user = USER;
-    String passwd = PASSWD;
 
     public static Connection connect;
     public Statement st;
@@ -18,8 +13,8 @@ public class DBConnection implements DbCredentials {
     public DBConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = String.format("jdbc:mysql://localhost:%s/%s", port, dbname);
-            connect = DriverManager.getConnection(url, user, passwd);
+            String url = String.format("jdbc:mysql://localhost:%s/%s", PORT, DBNAME);
+            connect = DriverManager.getConnection(url, USER, PASSWD);
             st = connect.createStatement();
         } catch (Exception e) {
             System.out.println(e);
