@@ -1,5 +1,6 @@
-package com.jmatch.dao;
+package com.jmatch.services;
 
+import com.jmatch.config.DBConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import com.jmatch.modelo.Cliente;

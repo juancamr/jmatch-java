@@ -1,77 +1,53 @@
 package com.jmatch.controlador;
 
+import com.jmatch.modelo.Cliente;
+import com.jmatch.services.CRUDCliente;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.jmatch.modelo.Cliente;
-import com.jmatch.dao.CRUDCliente;
-import com.jmatch.dao.DBConnection;
-import java.sql.SQLException;
 
-@WebServlet(name = "ControlCliente", urlPatterns = {
-    "/clientes", "/clientes/agregar", "/clientes/editar", "/clientes/eliminar"
-})
-public class ClienteControlador extends HttpServlet {
+public class ClienteControlador {
 
-    CRUDCliente crudCliente = new CRUDCliente();
+    static CRUDCliente crudCliente = new CRUDCliente();
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    public static void getClientes(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        String url = request.getServletPath();
-        if (url.equals("/clientes")) {
-            request.setAttribute("listaClientes", crudCliente.getClientes());
-            String pagina = "WEB-INF/views/clientes.jsp";
-            RequestDispatcher rd = request.getRequestDispatcher(pagina);
-            rd.forward(request, response);
-        }
-
-        if (url.equals("/clientes/eliminar")) {
-            String id = request.getParameter("id");
-            System.out.println(id);
-            crudCliente.eliminarCliente(id);
-            response.sendRedirect("/clientes");
-        }
+        req.setAttribute("listaClientes", crudCliente.getClientes());
+        String pagina = "WEB-INF/views/clientes.jsp";
+        RequestDispatcher rd = req.getRequestDispatcher(pagina);
+        rd.forward(req, res);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public static void deleteCliente(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        String url = request.getServletPath();
-
-        if (url.equals("/clientes/agregar")) {
-            Cliente cliente = new Cliente();
-            cliente.setCodigo(request.getParameter("codigo"));
-            cliente.setNombre(request.getParameter("nombre"));
-            cliente.setApellido(request.getParameter("apellido"));
-            cliente.setTelefono(Integer.parseInt(request.getParameter("telefono")));
-            cliente.setCorreo(request.getParameter("correo"));
-            cliente.setPassword(request.getParameter("password"));
-            crudCliente.agregarCliente(cliente);
-            response.sendRedirect("/clientes");
-        }
-        
-        if (url.equals("/clientes/editar")) {
-            Cliente cliente = new Cliente();
-            cliente.setCodigo(request.getParameter("codigo"));
-            cliente.setNombre(request.getParameter("nombre"));
-            cliente.setApellido(request.getParameter("apellido"));
-            cliente.setTelefono(Integer.parseInt(request.getParameter("telefono")));
-            cliente.setCorreo(request.getParameter("correo"));
-            cliente.setPassword(request.getParameter("password"));
-            crudCliente.editarCliente(cliente);
-            response.sendRedirect("/clientes");
-        }
+        String id = req.getParameter("id");
+        System.out.println(id);
+        crudCliente.eliminarCliente(id);
+        res.sendRedirect("/clientes");
     }
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
+    public static void agregarCliente(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        crudCliente.agregarCliente(makeCliente(req));
+        res.sendRedirect("/clientes");
     }
 
+    public static void editarCliente(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        crudCliente.editarCliente(makeCliente(req));
+        res.sendRedirect("/clientes");
+    }
+    
+    private static Cliente makeCliente(HttpServletRequest req) { //metodo que se usa en agregar y editar
+        Cliente cliente = new Cliente();
+        cliente.setCodigo(req.getParameter("codigo"));
+        cliente.setNombre(req.getParameter("nombre"));
+        cliente.setApellido(req.getParameter("apellido"));
+        cliente.setTelefono(Integer.parseInt(req.getParameter("telefono")));
+        cliente.setCorreo(req.getParameter("correo"));
+        cliente.setPassword(req.getParameter("password"));
+        return cliente;
+    }
 }
