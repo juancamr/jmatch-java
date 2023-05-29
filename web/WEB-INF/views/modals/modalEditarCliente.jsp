@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
                     <label>ID_Cliente</label>
-                    <input type="text" name="codigo" disabled value="${cliente.getCodigo()}">
+                    <input type="text" name="codigo" value="${cliente.getCodigo()}">
                     <br>
                     <label>Nombres</label>
                     <input type="text" name="nombre" value="${cliente.getNombre()}"><br>

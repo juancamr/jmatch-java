@@ -4,18 +4,18 @@
 <h3>Agregar Cliente</h3>
 <form method="post" action="clientes/agregar">
     <label>ID_Cliente</label>
-    <input type="text" name="codigo">
+    <input type="text" name="codigo" required>
     <br>
     <label>Nombres</label>
-    <input type="text" name="nombre"><br>
+    <input type="text" name="nombre" required><br>
     <label>Apellidos</label>
-    <input type="text" name="apellido"><br>
+    <input type="text" name="apellido" required><br>
     <label>Telefono</label>
-    <input type="text" name="telefono"><br>
+    <input type="text" name="telefono" required><br>
     <label>Correo</label>
-    <input type="text" name="correo"><br>
+    <input type="text" name="correo" required><br>
     <label>Contraseña</label>
-    <input type="text" name="password"><br>
+    <input type="text" name="password" required><br>
 
     <button type="submit">Agregar</button>
 </form>

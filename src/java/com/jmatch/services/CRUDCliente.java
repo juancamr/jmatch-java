@@ -31,7 +31,6 @@ public class CRUDCliente extends DBConnection {
     }
 
     public boolean editarCliente(Cliente cliente) {
-        DebugObject.printObject(cliente);
         try {
             String sql = "update cliente set nombre=?, apellido=?, telefono=?, correo=?, password=? "
                     + "where id_cliente = \"" + cliente.getCodigo() + "\"";

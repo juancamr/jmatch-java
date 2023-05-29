@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ProyectoControlador {
-
+    
     static CRUDProyecto crudProyecto = new CRUDProyecto();
     static CRUDCliente crudCliente = new CRUDCliente();
-
+    
     public static void getProyectos(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         req.setAttribute("listaProyectos", crudProyecto.getProyectos());
@@ -27,7 +27,7 @@ public class ProyectoControlador {
         crudProyecto.agregarProyecto(makeProyecto(req));
         res.sendRedirect("/proyectos");
     }
-
+    
     private static Proyecto makeProyecto(HttpServletRequest req) { //metodo que se usara para agregar y editar
         Proyecto proyecto = new Proyecto();
         proyecto.setIdProyecto(req.getParameter("codigo"));
